@@ -2,6 +2,8 @@ import "./App.css";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { Body, Button, Search } from "../src/styles";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -9,7 +11,7 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Manchester?unitGroup=metric&key=GJQFRFUM5EJQKEXQGECBF7WG9&contentType=json"
+        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Manchester?unitGroup=metric&include=events%2Chours%2Ccurrent%2Cdays%2Calerts&key=GJQFRFUM5EJQKEXQGECBF7WG9&contentType=json"
       )
       .then((data) => {
         // console.log(data.data);
@@ -27,7 +29,7 @@ function App() {
   const searchWeather = () => {
     axios
       .get(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${input}?unitGroup=metric&key=GJQFRFUM5EJQKEXQGECBF7WG9&contentType=json`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${input}?unitGroup=metric&include=events%2Chours%2Ccurrent%2Cdays%2Calerts&key=GJQFRFUM5EJQKEXQGECBF7WG9&contentType=json`
       )
       .then((data) => {
         // console.log(data);
@@ -36,24 +38,30 @@ function App() {
       });
   };
   return (
-    <div>
+    <Body>
       {weather && (
         <div>
           <div className="search">
             <input onChange={weatherInput} type="text" />
-            <button onClick={searchWeather}>Search</button>
+
+            <button type="submit" onClick={searchWeather}>
+              Search
+            </button>
           </div>
           <div className="weather-info"></div>
           <h1>{weather.address}</h1>
           <h2>{weather.resolvedAddress}</h2>
           <div className="condition">
             <h3>{weather.currentConditions.conditions}</h3>
-            <img src={weather.currentConditions.icon} alt="weather" />
-            <h3>{weather.currentConditions.temp}Celsius</h3>
+            <img
+              src={`icons/${weather.currentConditions.icon}.svg`}
+              alt={weather.currentConditions.icon}
+            />
+            <h3>{weather.currentConditions.temp} Celsius</h3>
           </div>
         </div>
       )}
-    </div>
+    </Body>
   );
 }
 
