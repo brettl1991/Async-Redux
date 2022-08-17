@@ -2,8 +2,8 @@ import "./App.css";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
-import { Body, Button, Search } from "../src/styles";
+
+import { Body, Container } from "../src/styles";
 
 function App() {
   const [weather, setWeather] = useState(null);
@@ -34,32 +34,34 @@ function App() {
       .then((data) => {
         // console.log(data);
         setWeather(data.data);
+        setInput("");
         console.log(data.data);
       });
   };
   return (
     <Body>
       {weather && (
-        <div>
+        <Container>
           <div className="search">
-            <input onChange={weatherInput} type="text" />
+            <input onChange={weatherInput} type="text" value={input} />
 
             <button type="submit" onClick={searchWeather}>
               Search
             </button>
           </div>
-          <div className="weather-info"></div>
-          <h1>{weather.address}</h1>
-          <h2>{weather.resolvedAddress}</h2>
+          <div className="weather-info">
+            <h1>{weather.address}</h1>
+            <h2>{weather.resolvedAddress}</h2>
+          </div>
           <div className="condition">
             <h3>{weather.currentConditions.conditions}</h3>
             <img
               src={`icons/${weather.currentConditions.icon}.svg`}
               alt={weather.currentConditions.icon}
             />
-            <h3>{weather.currentConditions.temp} Celsius</h3>
+            <h4>{weather.currentConditions.temp} Celsius</h4>
           </div>
-        </div>
+        </Container>
       )}
     </Body>
   );
