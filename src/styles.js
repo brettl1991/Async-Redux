@@ -28,6 +28,11 @@ export const Body = styled(motion.div)`
   .search {
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+    }
   }
 
   button {
@@ -80,6 +85,10 @@ export const Body = styled(motion.div)`
       padding: 10px;
     }
   }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 export const Container = styled.div`
@@ -88,4 +97,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
