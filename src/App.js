@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     axios
       .get(
-        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Manchester?unitGroup=metric&include=events%2Chours%2Ccurrent%2Cdays%2Calerts&key=GJQFRFUM5EJQKEXQGECBF7WG9&contentType=json"
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Manchester?unitGroup=metric&include=events%2Chours%2Ccurrent%2Cdays%2Calerts&key=${process.env.REACT_APP_WEATHER_API}&contentType=json`
       )
       .then((data) => {
         // console.log(data.data);
